@@ -1,3 +1,7 @@
+/**
+ Needed to change to a binary data upload and make HTTP Method a 'PUT'
+ */
+
 package com.spoon.backgroundFileUpload;
 
 import android.app.PendingIntent;
@@ -10,7 +14,7 @@ import com.sromku.simple.storage.SimpleStorage;
 import com.sromku.simple.storage.Storage;
 import com.sromku.simple.storage.helpers.OrderType;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.BinaryUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
 import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadNotificationConfig;
@@ -167,26 +171,18 @@ public class FileTransferBackground extends CordovaPlugin {
       LogMessage("upload with id "+payload.id + " is already being uploaded. ignoring re-upload request");
       return;
     }
-    try {
-      ArrayList<JSONObject> existingUploads = getUploadHistory();
-      for (JSONObject upload : existingUploads) {
-        String id = upload.getString("id");
-        if (id.equalsIgnoreCase(payload.id)) {
-          LogMessage("upload with id "+payload.id + " is already exists in upload queue. ignoring re-upload request");
-          return;
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+
+    // ProFit MOD removing re-upload check
 
     LogMessage("adding upload "+payload.id);
     this.createUploadInfoFile(payload.id, jsonPayload);
     if (NetworkMonitor.isConnected) {
 
-      MultipartUploadRequest request = new MultipartUploadRequest(this.cordova.getActivity().getApplicationContext(), payload.id,payload.serverUrl)
-              .addFileToUpload(payload.filePath, payload.fileKey)
-              .setMaxRetries(0);
+        // ProFit MOD
+      BinaryUploadRequest request = new BinaryUploadRequest(this.cordova.getActivity().getApplicationContext(), payload.id, payload.serverUrl)
+        .setMethod("PUT")
+        .setFileToUpload(payload.filePath)
+        .setMaxRetries(0);
 
       if (payload.showNotification) {
         UploadNotificationConfig config = new UploadNotificationConfig();
@@ -382,6 +378,4 @@ public class FileTransferBackground extends CordovaPlugin {
       networkMonitor.stopMonitoring();
     //broadcastReceiver.unregister(cordova.getActivity().getApplicationContext());
   }
-
-
 }
