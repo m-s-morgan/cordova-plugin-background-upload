@@ -6,3 +6,9 @@ if(cordovaConfig.MIN_SDK_VERSION < minSdkVersion){
 dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.4.3'
 }
+
+javaCompileOptions {
+    annotationProcessorOptions {
+        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+    }
+}
