@@ -128,16 +128,12 @@ static NSString * kUploadUUIDStrPropertyKey = @"com.spoonconsulting.plugin-backg
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
     NSError *error;
     NSMutableURLRequest *request =
-    [serializer multipartFormRequestWithMethod:@"POST"
-                                     URLString:url.absoluteString
-                                    parameters:parameters
-                     constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-     {
-        NSString *filename = [fileURL.absoluteString lastPathComponent];
-        NSData * data = [NSData dataWithContentsOfURL:fileURL];
-        [formData appendPartWithFileData:data name:fileKey fileName:filename mimeType:@"application/octet-stream"];
-    }
-                                         error:&error];
+    [serializer requestWithMethod:payload[@"requestMethod"]
+                URLString:url.absoluteString
+                parameters:parameters
+                setHTTPBody:[NSData dataWithContentsOfURL:fileURL]
+                error:&error];
+
     if (error)
         return handler(error, nil);
     for (NSString *key in headers) {

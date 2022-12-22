@@ -29,7 +29,7 @@ import javax.net.ssl.SSLException;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -340,24 +340,24 @@ public final class UploadTask extends Worker {
         ProgressRequestBody fileRequestBody = new ProgressRequestBody(mediaType, file.length(), new FileInputStream(file), this::handleProgress);
 
         // Build body
-        final MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
+        // final MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
 
-        // With the parameters
-        final int parametersCount = getInputData().getInt(KEY_INPUT_PARAMETERS_COUNT, 0);
-        if (parametersCount > 0) {
-            final String[] parameterNames = getInputData().getStringArray(KEY_INPUT_PARAMETERS_NAMES);
-            assert parameterNames != null;
+        // // With the parameters
+        // final int parametersCount = getInputData().getInt(KEY_INPUT_PARAMETERS_COUNT, 0);
+        // if (parametersCount > 0) {
+        //     final String[] parameterNames = getInputData().getStringArray(KEY_INPUT_PARAMETERS_NAMES);
+        //     assert parameterNames != null;
 
-            for (int i = 0; i < parametersCount; i++) {
-                final String key = parameterNames[i];
-                final Object value = getInputData().getKeyValueMap().get(KEY_INPUT_PARAMETER_VALUE_PREFIX + i);
+        //     for (int i = 0; i < parametersCount; i++) {
+        //         final String key = parameterNames[i];
+        //         final Object value = getInputData().getKeyValueMap().get(KEY_INPUT_PARAMETER_VALUE_PREFIX + i);
 
-                bodyBuilder.addFormDataPart(key, value.toString());
-            }
-        }
+        //         bodyBuilder.addFormDataPart(key, value.toString());
+        //     }
+        // }
 
-        bodyBuilder.addFormDataPart(fileKey, filepath, fileRequestBody);
-        bodyBuilder.setType(MultipartBody.FORM);
+        // bodyBuilder.addFormDataPart(fileKey, filepath, fileRequestBody);
+        // bodyBuilder.setType(MultipartBody.FORM);
 
         // Start build request
         String method = getInputData().getString(KEY_INPUT_HTTP_METHOD);
@@ -366,7 +366,7 @@ public final class UploadTask extends Worker {
         }
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
-                .method(method.toUpperCase(), bodyBuilder.build());
+                .method(method.toUpperCase(), fileRequestBody);
 
         // Write headers
         final int headersCount = getInputData().getInt(KEY_INPUT_HEADERS_COUNT, 0);
