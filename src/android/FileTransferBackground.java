@@ -191,7 +191,7 @@ public class FileTransferBackground extends CordovaPlugin {
         config.getError().autoClear = true;
         config.setClearOnActionForAllStatuses(true);
         Intent intent = new Intent(cordova.getContext(), cordova.getActivity().getClass());
-        PendingIntent pendingIntent = PendingIntent.getActivity(cordova.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(cordova.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         config.setClickIntentForAllStatuses(pendingIntent);
         if (payload.notificationTitle != null)
           config.getProgress().title = payload.notificationTitle;
