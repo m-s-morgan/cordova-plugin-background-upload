@@ -10,9 +10,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.sromku.simple.storage.SimpleStorage;
-import com.sromku.simple.storage.Storage;
-import com.sromku.simple.storage.helpers.OrderType;
+import com.snatik.storage.SimpleStorage;
+import com.snatik.storage.Storage;
+import com.snatik.storage.helpers.OrderType;
 
 import net.gotev.uploadservice.BinaryUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
