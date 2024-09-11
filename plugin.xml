@@ -8,10 +8,7 @@
         <clobbers target="FileTransferManager" />
     </js-module>
     <platform name="android">
-        <framework src="net.gotev:uploadservice:3.5.2" />
-        <framework src="net.gotev:uploadservice-okhttp:3.5.2" />
         <framework src="com.squareup.okhttp3:okhttp:4.10.0" />
-        <framework src="com.sromku:simple-storage:1.2.1" />
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="FileTransferBackground">
                 <param name="android-package" value="com.spoon.backgroundFileUpload.FileTransferBackground" />
@@ -29,6 +26,9 @@
                 <param name="android-package" value="com.spoon.backgroundFileUpload.ConnectionStatusListener" />
             </feature>
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="net.gotev.uploadservice.UploadService" android:foregroundServiceType="mediaProjection" />
+        </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
@@ -37,12 +37,75 @@
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
         </config-file>
         <source-file src="src/android/FileTransferBackground.java" target-dir="src/com/spoon/backgroundFileUpload" />
 		<source-file src="src/android/NetworkMonitor.java" target-dir="src/com/spoon/backgroundFileUpload" />
 		<source-file src="src/android/UploadState.java" target-dir="src/com/spoon/backgroundFileUpload" />
 		<source-file src="src/android/FileTransferSettings.java" target-dir="src/com/spoon/backgroundFileUpload" />
 		<source-file src="src/android/ConnectionStatusListener.java" target-dir="src/com/spoon/backgroundFileUpload" />
+
+        <source-file src="src/com/snatik/storage/helpers/ImmutablePair.java" target-dir="src/com/snatik/storage/helpers" />
+        <source-file src="src/com/snatik/storage/helpers/OrderType.java" target-dir="src/com/snatik/storage/helpers" />
+        <source-file src="src/com/snatik/storage/helpers/SizeUnit.java" target-dir="src/com/snatik/storage/helpers" />
+
+        <source-file src="src/com/snatik/storage/security/CipherAlgorithmType.java" target-dir="src/com/snatik/storage/security" />
+        <source-file src="src/com/snatik/storage/security/CipherModeType.java" target-dir="src/com/snatik/storage/security" />
+        <source-file src="src/com/snatik/storage/security/CipherPaddingType.java" target-dir="src/com/snatik/storage/security" />
+        <source-file src="src/com/snatik/storage/security/CipherTransformationType.java" target-dir="src/com/snatik/storage/security" />
+        <source-file src="src/com/snatik/storage/security/SecurityUtil.java" target-dir="src/com/snatik/storage/security" />
+
+        <source-file src="src/com/snatik/storage/AbstractDiskStorage.java" target-dir="src/com/snatik/storage" />
+        <source-file src="src/com/snatik/storage/ExternalStorage.java" target-dir="src/com/snatik/storage" />
+        <source-file src="src/com/snatik/storage/InternalStorage.java" target-dir="src/com/snatik/storage" />
+        <source-file src="src/com/snatik/storage/SimpleStorage.java" target-dir="src/com/snatik/storage" />
+        <source-file src="src/com/snatik/storage/SimpleStorageConfiguration.java" target-dir="src/com/snatik/storage" />
+        <source-file src="src/com/snatik/storage/Storable.java" target-dir="src/com/snatik/storage" />
+        <source-file src="src/com/snatik/storage/Storage.java" target-dir="src/com/snatik/storage" />
+
+        <source-file src="src/net/gotev/uploadservice/http/impl/HurlBodyWriter.java" target-dir="src/net/gotev/uploadservice/http/impl" />
+        <source-file src="src/net/gotev/uploadservice/http/impl/HurlStack.java" target-dir="src/net/gotev/uploadservice/http/impl" />
+        <source-file src="src/net/gotev/uploadservice/http/impl/HurlStackConnection.java" target-dir="src/net/gotev/uploadservice/http/impl" />
+
+        <source-file src="src/net/gotev/uploadservice/http/BodyWriter.java" target-dir="src/net/gotev/uploadservice/http" />
+        <source-file src="src/net/gotev/uploadservice/http/HttpConnection.java" target-dir="src/net/gotev/uploadservice/http" />
+        <source-file src="src/net/gotev/uploadservice/http/HttpStack.java" target-dir="src/net/gotev/uploadservice/http" />
+
+        <source-file src="src/net/gotev/uploadservice/okhttp/OkHttpBodyWriter.java" target-dir="src/net/gotev/uploadservice/okhttp" />
+        <source-file src="src/net/gotev/uploadservice/okhttp/OkHttpStack.java" target-dir="src/net/gotev/uploadservice/okhttp" />
+        <source-file src="src/net/gotev/uploadservice/okhttp/OkHttpStackConnection.java" target-dir="src/net/gotev/uploadservice/okhttp" />
+
+        <source-file src="src/net/gotev/uploadservice/schemehandlers/ContentSchemeHandler.java" target-dir="src/net/gotev/uploadservice/schemehandlers" />
+        <source-file src="src/net/gotev/uploadservice/schemehandlers/FileSchemeHandler.java" target-dir="src/net/gotev/uploadservice/schemehandlers" />
+        <source-file src="src/net/gotev/uploadservice/schemehandlers/SchemeHandler.java" target-dir="src/net/gotev/uploadservice/schemehandlers" />
+        <source-file src="src/net/gotev/uploadservice/schemehandlers/SchemeHandlerFactory.java" target-dir="src/net/gotev/uploadservice/schemehandlers" />
+
+        <source-file src="src/net/gotev/uploadservice/BinaryUploadRequest.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/BinaryUploadTask.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/BroadcastData.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/ContentType.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/DefaultLoggerDelegate.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/HttpUploadRequest.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/HttpUploadTask.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/HttpUploadTaskParameters.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/Logger.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/MultipartUploadRequest.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/MultipartUploadTask.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/NameValue.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/Placeholders.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/ServerResponse.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadFile.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadInfo.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadNotificationAction.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadNotificationConfig.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadNotificationStatusConfig.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadRequest.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadService.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadServiceBroadcastReceiver.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadServiceSingleBroadcastReceiver.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadStatusDelegate.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadTask.java" target-dir="src/net/gotev/uploadservice" />
+        <source-file src="src/net/gotev/uploadservice/UploadTaskParameters.java" target-dir="src/net/gotev/uploadservice" />
     </platform>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
@@ -56,6 +119,5 @@
         <source-file src="src/ios/FileTransferBackground.m" />
          <header-file src="src/ios/FileUploadManager.h" />
         <source-file src="src/ios/FileUploadManager.m" />
-
     </platform>
 </plugin>
