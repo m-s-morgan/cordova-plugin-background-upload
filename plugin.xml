@@ -25,10 +25,172 @@
 			<feature name="ConnectionStatusListener">
                 <param name="android-package" value="com.spoon.backgroundFileUpload.ConnectionStatusListener" />
             </feature>
+
+			<feature name="ImmutablePair">
+                <param name="android-package" value="com.snatik.storage.helpers.ImmutablePair" />
+            </feature>
+			<feature name="OrderType">
+                <param name="android-package" value="com.snatik.storage.helpers.OrderType" />
+            </feature>
+			<feature name="SizeUnit">
+                <param name="android-package" value="com.snatik.storage.helpers.SizeUnit" />
+            </feature>
+
+			<feature name="CipherAlgorithmType">
+                <param name="android-package" value="com.snatik.storage.security.CipherAlgorithmType" />
+            </feature>
+			<feature name="CipherModeType">
+                <param name="android-package" value="com.snatik.storage.security.CipherModeType" />
+            </feature>
+			<feature name="CipherPaddingType">
+                <param name="android-package" value="com.snatik.storage.security.CipherPaddingType" />
+            </feature>
+			<feature name="CipherTransformationType">
+                <param name="android-package" value="com.snatik.storage.security.CipherTransformationType" />
+            </feature>
+			<feature name="SecurityUtil">
+                <param name="android-package" value="com.snatik.storage.security.SecurityUtil" />
+            </feature>
+
+			<feature name="AbstractDiskStorage">
+                <param name="android-package" value="com.snatik.storage.AbstractDiskStorage" />
+            </feature>
+			<feature name="ExternalStorage">
+                <param name="android-package" value="com.snatik.storage.ExternalStorage" />
+            </feature>
+			<feature name="InternalStorage">
+                <param name="android-package" value="com.snatik.storage.InternalStorage" />
+            </feature>
+			<feature name="SimpleStorage">
+                <param name="android-package" value="com.snatik.storage.SimpleStorage" />
+            </feature>
+			<feature name="SimpleStorageConfiguration">
+                <param name="android-package" value="com.snatik.storage.SimpleStorageConfiguration" />
+            </feature>
+			<feature name="Storable">
+                <param name="android-package" value="com.snatik.storage.Storable" />
+            </feature>
+			<feature name="Storage">
+                <param name="android-package" value="com.snatik.storage.Storage" />
+            </feature>
+
+			<feature name="BodyWriter">
+                <param name="android-package" value="net.gotev.uploadservice.http.BodyWriter" />
+            </feature>
+			<feature name="HttpConnection">
+                <param name="android-package" value="net.gotev.uploadservice.http.HttpConnection" />
+            </feature>
+			<feature name="HttpStack">
+                <param name="android-package" value="net.gotev.uploadservice.http.HttpStack" />
+            </feature>
+
+			<feature name="OkHttpBodyWriter">
+                <param name="android-package" value="net.gotev.uploadservice.okhttp.OkHttpBodyWriter" />
+            </feature>
+			<feature name="OkHttpStack">
+                <param name="android-package" value="net.gotev.uploadservice.okhttp.OkHttpStack" />
+            </feature>
+			<feature name="OkHttpStackConnection">
+                <param name="android-package" value="net.gotev.uploadservice.okhttp.OkHttpStackConnection" />
+            </feature>
+
+			<feature name="ContentSchemeHandler">
+                <param name="android-package" value="net.gotev.uploadservice.schemehandlers.ContentSchemeHandler" />
+            </feature>
+			<feature name="FileSchemeHandler">
+                <param name="android-package" value="net.gotev.uploadservice.schemehandlers.FileSchemeHandler" />
+            </feature>
+			<feature name="SchemeHandler">
+                <param name="android-package" value="net.gotev.uploadservice.schemehandlers.SchemeHandler" />
+            </feature>
+			<feature name="SchemeHandlerFactory">
+                <param name="android-package" value="net.gotev.uploadservice.schemehandlers.SchemeHandlerFactory" />
+            </feature>
+
+			<feature name="BinaryUploadRequest">
+                <param name="android-package" value="net.gotev.uploadservice.BinaryUploadRequest" />
+            </feature>
+			<feature name="BinaryUploadTask">
+                <param name="android-package" value="net.gotev.uploadservice.BinaryUploadTask" />
+            </feature>
+			<feature name="BroadcastData">
+                <param name="android-package" value="net.gotev.uploadservice.BroadcastData" />
+            </feature>
+			<feature name="ContentType">
+                <param name="android-package" value="net.gotev.uploadservice.ContentType" />
+            </feature>
+			<feature name="DefaultLoggerDelegate">
+                <param name="android-package" value="net.gotev.uploadservice.DefaultLoggerDelegate" />
+            </feature>
+			<feature name="HttpUploadRequest">
+                <param name="android-package" value="net.gotev.uploadservice.HttpUploadRequest" />
+            </feature>
+			<feature name="HttpUploadTask">
+                <param name="android-package" value="net.gotev.uploadservice.HttpUploadTask" />
+            </feature>
+			<feature name="HttpUploadTaskParameters">
+                <param name="android-package" value="net.gotev.uploadservice.HttpUploadTaskParameters" />
+            </feature>
+			<feature name="Logger">
+                <param name="android-package" value="net.gotev.uploadservice.Logger" />
+            </feature>
+			<feature name="MultipartUploadRequest">
+                <param name="android-package" value="net.gotev.uploadservice.MultipartUploadRequest" />
+            </feature>
+			<feature name="MultipartUploadTask">
+                <param name="android-package" value="net.gotev.uploadservice.MultipartUploadTask" />
+            </feature>
+			<feature name="NameValue">
+                <param name="android-package" value="net.gotev.uploadservice.NameValue" />
+            </feature>
+			<feature name="Placeholders">
+                <param name="android-package" value="net.gotev.uploadservice.Placeholders" />
+            </feature>
+			<feature name="ServerResponse">
+                <param name="android-package" value="net.gotev.uploadservice.ServerResponse" />
+            </feature>
+			<feature name="UploadFile">
+                <param name="android-package" value="net.gotev.uploadservice.UploadFile" />
+            </feature>
+			<feature name="UploadInfo">
+                <param name="android-package" value="net.gotev.uploadservice.UploadInfo" />
+            </feature>
+			<feature name="UploadNotificationAction">
+                <param name="android-package" value="net.gotev.uploadservice.UploadNotificationAction" />
+            </feature>
+			<feature name="UploadNotificationConfig">
+                <param name="android-package" value="net.gotev.uploadservice.UploadNotificationConfig" />
+            </feature>
+			<feature name="UploadNotificationStatusConfig">
+                <param name="android-package" value="net.gotev.uploadservice.UploadNotificationStatusConfig" />
+            </feature>
+			<feature name="UploadRequest">
+                <param name="android-package" value="net.gotev.uploadservice.UploadRequest" />
+            </feature>
+			<feature name="UploadService">
+                <param name="android-package" value="net.gotev.uploadservice.UploadService" />
+            </feature>
+			<feature name="UploadServiceBroadcastReceiver">
+                <param name="android-package" value="net.gotev.uploadservice.UploadServiceBroadcastReceiver" />
+            </feature>
+			<feature name="UploadServiceSingleBroadcastReceiver">
+                <param name="android-package" value="net.gotev.uploadservice.UploadServiceSingleBroadcastReceiver" />
+            </feature>
+			<feature name="UploadStatusDelegate">
+                <param name="android-package" value="net.gotev.uploadservice.UploadStatusDelegate" />
+            </feature>
+			<feature name="UploadTask">
+                <param name="android-package" value="net.gotev.uploadservice.UploadTask" />
+            </feature>
+			<feature name="UploadTaskParameters">
+                <param name="android-package" value="net.gotev.uploadservice.UploadTaskParameters" />
+            </feature>
         </config-file>
+
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <service android:name="net.gotev.uploadservice.UploadService" android:foregroundServiceType="mediaProjection" />
         </config-file>
+        
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
