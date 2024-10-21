@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 
@@ -113,7 +114,7 @@ public class NetworkMonitor {
 
       if (cm != null) {
         NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
-        
+
         if (capabilities != null) {
           return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
                   || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
