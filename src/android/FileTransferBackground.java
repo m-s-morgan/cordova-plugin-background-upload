@@ -310,7 +310,11 @@ public class FileTransferBackground extends CordovaPlugin {
       storage.createDirectory(uploadDirectoryName);
       LogMessage("created FileTransfer working directory ");
 
-      cordova.getActivity().getApplicationContext().registerReceiver(broadcastReceiver, new IntentFilter( UploadService.NAMESPACE+".uploadservice.broadcast.status" ) );
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        cordova.getActivity().getApplicationContext().registerReceiver(broadcastReceiver, new IntentFilter( UploadService.NAMESPACE+".uploadservice.broadcast.status" ), Context.RECEIVER_NOT_EXPORTED );
+      } else {
+        cordova.getActivity().getApplicationContext().registerReceiver(broadcastReceiver, new IntentFilter( UploadService.NAMESPACE+".uploadservice.broadcast.status" ) );
+      }
 
       if (options != null) {
         //initialised global configuration parameters here

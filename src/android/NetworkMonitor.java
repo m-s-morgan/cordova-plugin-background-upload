@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 import java.util.Locale;
 
@@ -85,12 +86,21 @@ public class NetworkMonitor {
         }
 
       };
-      context.registerReceiver(receiver, intentFilter);
+
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        context.registerReceiver(receiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+      } else {
+        context.registerReceiver(receiver, intentFilter);
+      }
     }
   }
 
+  private static ConnectivityManager getConnectivityManager(Context context) {
+    return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+  }
+
   private static NetworkInfo getNetworkInfo(Context context) {
-    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    ConnectivityManager cm = getConnectivityManager(context);
     if (cm != null) {
       return cm.getActiveNetworkInfo();
     }
@@ -98,8 +108,25 @@ public class NetworkMonitor {
   }
 
   private static boolean isConnectedToNetwork(Context context) {
-    NetworkInfo activeNetwork = getNetworkInfo(context);
-    return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      ConnectivityManager cm = getConnectivityManager(context);
+
+      if (cm != null) {
+        NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+        
+        if (capabilities != null) {
+          return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                  || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                  || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+                  || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
+        }
+      }
+
+      return false;
+    } else {
+      NetworkInfo activeNetwork = getNetworkInfo(context);
+      return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
   }
 
   private String getType(NetworkInfo info) {

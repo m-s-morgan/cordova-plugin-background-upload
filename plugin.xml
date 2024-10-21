@@ -188,7 +188,7 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <service android:name="net.gotev.uploadservice.UploadService" android:foregroundServiceType="mediaProjection" />
+            <service android:name="net.gotev.uploadservice.UploadService" android:foregroundServiceType="mediaPlayback" />
         </config-file>
         
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -200,6 +200,7 @@
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
             <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
         </config-file>
         <source-file src="src/android/FileTransferBackground.java" target-dir="src/com/spoon/backgroundFileUpload" />
 		<source-file src="src/android/NetworkMonitor.java" target-dir="src/com/spoon/backgroundFileUpload" />
